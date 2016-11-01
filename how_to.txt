@@ -1,0 +1,112 @@
+#------------------------------------------------
+# Technical details of bachelor study of Matyas
+#
+#
+#------------------------------------------------
+
+## VM node
+ssh -Y -C -t -p 24 login.ph2.physik.uni-goettinge.de ssh -Y -C pcatlas47
+ssh -p 24 -Y -C -t login.ph2.physik.uni-goettingen.de ssh -Y -C madface@pcatlas47
+
+## To be root
+sudo su -
+
+
+## Installing MadFace R package
+
+# Open brower and type "MadFace" --> GenKawamura/MadFace
+# https://github.com/GenKawamura/MadFace/tree/master/rsrc
+# https://github.com/GenKawamura/containers/tree/master/madface.el6
+
+## clone container
+git clone https://github.com/GenKawamura/containers
+
+## Installing RPMs
+[root@pcatlas47 ~]# ls containers/madface.el6/
+android-madface-latest.apk  MadFace-latest.x86_64.rpm  MadFace-R-libs-latest.x86_64.rpm
+[root@pcatlas47 ~]# yum install containers/madface.el6/MadFace-R-libs-latest.x86_64.rpm
+
+[root@pcatlas47 ~]# su - madface
+
+
+##---------------------------------
+## Official instances
+##---------------------------------
+## Instance of GoeGrid MadFace
+http://goegrid-controller.ph2.physik.uni-goettingen.de:8111/
+
+## Instance of ADCoS MadFace
+http://goegrid-controller.ph2.physik.uni-goettingen.de:8112/
+
+
+##---------------------------------
+## Data directory
+##---------------------------------
+/work/pcatlas24/MadFace
+
+
+##---------------------------------
+## R packaging
+##---------------------------------
+## In R shell, installing devtools, roxygen2, testthat
+site="http://ftp5.gwdg.de/pub/misc/cran/"
+package="devtools"
+install.packages(package, contriburl=contrib.url(site))
+package="roxygen2"
+install.packages(package, contriburl=contrib.url(site))
+package="testthat"
+install.packages(package, contriburl=contrib.url(site))
+
+
+## Make a skeleton of your package
+ $ library(devtools)
+
+ $ package.name <- "myproject"
+ $ create(package.name)
+
+
+-----------------------------------------------
+#' Print hello
+#'
+#' This function prints hello 
+#'
+#' @param fname First name
+#' @param lname Last name
+#' @export
+#' @examples
+#' hello(fname="Tomas",lname="Greif")
+#' hello(fname="Your",lname="Name")
+
+hello <- function(fname, lname) {
+ cat(paste("Hello",fname,lname,"!"))
+}
+-----------------------------------------------
+
+
+DESCRIPTION
+-----------------------------------------------
+Package: myproject
+Title: My Project
+Description: 
+Version: 0.1
+Author: Gen Kawamura
+Maintainer: Gen Kawamura <gen.kawamura@cern.ch>
+Depends: R (>= 3.0.1)
+License: GPL-2
+LazyData: true
+-----------------------------------------------
+
+NEWS
+-----------------------------------------------
+madviewR: v0.1.0
+----------------------------------------
+my initial test
+-----------------------------------------------
+
+
+# Make file
+wget --no-check-certificate https://raw.githubusercontent.com/kaz-yos/tableone/master/Makefile
+
+
+## Checking the package and generate a pdf file
+make check
