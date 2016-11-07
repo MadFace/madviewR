@@ -111,6 +111,26 @@ wget --no-check-certificate https://raw.githubusercontent.com/kaz-yos/tableone/m
 ## Checking the package and generate a pdf file
 make check
 
+##---------------------------------
+## How to use screen command
+##---------------------------------
+
+ screen
+
+ ## screen commands
+ C-a c          make new screen
+ C-a space      change screen
+ C-a K          kill a screen
+ C-a d          detach screen
+
+ ## show running screens
+ screen -ls
+
+ ## attach screen
+ scrren -x
+ screen -x <screen num>
+
+
 
 ##---------------------------------
 ## Running analysis processor
