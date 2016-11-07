@@ -110,3 +110,26 @@ wget --no-check-certificate https://raw.githubusercontent.com/kaz-yos/tableone/m
 
 ## Checking the package and generate a pdf file
 make check
+
+
+##---------------------------------
+## Running analysis processor
+##---------------------------------
+
+## Configuration files
+sites/goegrid/monitoring-urls.json
+sites/goegrid/config.json
+
+## Please run madface with -a option
+./madface -a
+
+## Better to run X-window before the following execution
+./madface -x
+
+## then the command line is displayed and processed
+bin/analysis-processor -m all -j sites/default/config.json -s sites/default/servers.json -u sites/default/monitoring-urls.json -o data/goegrid/json/summary.json -c data/goegrid/capture -a data/goegrid/analysis -t sites/default/summary_template -r 384x384 -e data/goegrid/thumbnail -n 2 -x
+
+## Look into bin/analsys-processor
+## Select appropriate mode such as {images|classifier|madvision|result|pathway|sumamry}
+
+
